@@ -1,0 +1,24 @@
+name: Deploy to Server
+
+
+on:
+  push:
+    branches:
+      - master  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+
+      # Step 2: Run Docker Compose to bring down the old containers and rebuild the services
+      - name: Deploy the application with Docker Compose
+        run: |
+          cd /home/ubuntu/ms-demo/deploy/docker-compose  
+          sudo docker-compose down
+          sudo docker-compose up -d --build --force-recreate
