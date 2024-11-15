@@ -174,22 +174,4 @@ services:
     hostname: user-simulator
     command: "-d 60 -r 200 -c 2 -h edge-router"
     
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-     - "9090:9090"
-    volumes:
-     - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
-  grafana:
-   image: grafana/grafana:latest
-   container_name: grafana
-   ports:
-     - "3000:3000"
-   environment:
-    - GF_SECURITY_ADMIN_PASSWORD=admin
-   volumes:
-    - ./grafana/prometheus-datasource.json:/etc/grafana/provisioning/datasources/prometheus-datasource.json
-    - ./grafana/sock-shop-performance-dashboard.json:/etc/grafana/provisioning/dashboards/sock-shop-performance-dashboard.json
-    - ./grafana/prometheus-node-exporter-dashboard.json:/etc/grafana/provisioning/dashboards/prometheus-node-exporter-dashboard.json
